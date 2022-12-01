@@ -51,5 +51,7 @@ export function* watchFetchAll() {
 }
 
 export function* runExample() {
+    // all - блокирующий эффект до тех пора, пока не будет
+    // вызван экшен с типом, который можно поместить в кач-ве аргумента в take (types)
     yield all([ watchFetchPlanetsAsync(), watchCancelFetch(), watchFetchAll() ]);
 }

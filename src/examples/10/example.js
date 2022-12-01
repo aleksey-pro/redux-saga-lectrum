@@ -1,9 +1,11 @@
 /**
  * Эффект takeLatest не блокирует поток, и похож на take + fork.
+ * ИСПОЛЬЗУЕМ ЧТОБЫ ВЗЯТЬ ПОСЛЕДНЕЕ ЗНАЧЕНИЕ РЯДА ОПЕРАЦИЙ
  *
  * Однако при попытке начать новый task до завершения предыдущего — предыдущий
  * task будет отменён с помощью эффекта cancel.
  * То есть до конца единовременно выполнится лишь тот task, который запустился последним.
+ * ПРИ БЫСТРОМ КЛИКЕ НА КНОПКУ ВЫЗОВА FETCH_PLANETS_ASYNC
  */
 
 // Core
@@ -24,5 +26,5 @@ function* fetchPlanets(action) {
 }
 
 export function* runExample() {
-    yield takeLatest(types.FETCH_PLANETS_ASYNC, fetchPlanets);
+    yield takeLatest(types.FETCH_PLANETS_ASYNC, fetchPlanets); // = take + fork + CANCEL
 }

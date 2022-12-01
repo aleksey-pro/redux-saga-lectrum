@@ -26,6 +26,11 @@ function* fetchPlanets(action) {
 export function* runExample() {
     while (true) {
         const action = yield take(types.FETCH_PLANETS_ASYNC);
+        // fork регистрирует факт запуска саги, а ее выполнение происходит параллельно
+
+        // при быстром повторном нажатии на кнопку FETCH_PLANETS_ASYNC
+        // - если это call - повторный экшен будет проигнорирован, так как сага занята выполнением fetch
+        // - если это fork - каждый fetch будет выполнен,  так как процесс будет зарегистрирован в любом случае
 
         const task = yield fork(fetchPlanets, action);
 

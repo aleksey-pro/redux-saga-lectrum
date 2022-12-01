@@ -20,5 +20,6 @@ function* fetchPlanets(action) {
 }
 
 export function* runExample() {
+    // при быстром повторном нажатии экшен FETCH_PLANETS_ASYNC не будет блокироваться сагой fetchPlanets
     yield takeEvery(types.FETCH_PLANETS_ASYNC, fetchPlanets);
 }

@@ -7,7 +7,7 @@ import Styles from './styles.module.css';
 export const Entity = (props) => {
     const [ page, setPage ] = useState(1);
 
-    const entitiesJSX = props.entities.map((entity) => (
+    const entitiesJSX = props.entities && props.entities.map((entity) => (
         <li key = { entity.name }>
             <span>
                 <span>Имя:</span> {entity.name}

@@ -21,10 +21,12 @@ export function* runExample() {
         const action = yield take(types.FETCH_PLANETS_ASYNC);
 
         yield put(swapiActions.setIsFetching(true));
-        const response = yield call(api.fetchPlanets, [ action.payload ]);
-        const data = yield apply(response, response.json);
+        // изменения относительно 1го примера!
+        const response = yield call(api.fetchPlanets, [ action.payload ]); // 2й аргумент - значение аргумента, передаваемого функции 1го аргумента в call
+        const data = yield apply(response, response.json); // выполняет ф-цию в строго фиксированном контексте выполнения, response - контекст, 2й арг - ссылка на ф-цию
 
         yield put(swapiActions.fillPlanets(data.results));
+        // yield put({ type: swapiActions.fillPlanets, payload: data.results }); // как вариант если по-другому экшены писать
         yield put(swapiActions.setIsFetching(false));
     }
 }

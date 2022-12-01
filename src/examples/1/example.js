@@ -17,10 +17,14 @@ import { swapiActions } from '../../bus/swapi/actions';
 import { api } from '../../Api';
 
 export function* runExample() {
+    // try-catch - куда с циклом while??
     while (true) {
-        const action = yield take(types.FETCH_PLANETS_ASYNC);
+        const action = yield take(types.FETCH_PLANETS_ASYNC); // сработает сразу при получении экшена FETCH_PLANETS_ASYNC
+        // блокирующий => генератор будет висеть пока не отработает экшен
+        // запускается при нажатии на кнопку которая запускает dispatch fetchPeopleAsync и мы ее тут отловили
+        // и это запускает работу всего runExample
 
-        yield put(swapiActions.setIsFetching(true));
+        yield put(swapiActions.setIsFetching(true)); // выполняяет action redux внутри сага-воркера === dispatch
         const response = yield api.fetchPlanets(action.payload);
         const data = yield response.json();
 

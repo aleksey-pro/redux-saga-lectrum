@@ -1,3 +1,8 @@
+
+/**
+* Более простой способ длегирования sag-и - call
+*/
+
 /**
  * Существуют блокирующие и неблокирующие эффекты.
  * Например, take — блокирующий эффект.
@@ -28,8 +33,10 @@ export function* runExample() {
         const action = yield take(types.FETCH_PLANETS_ASYNC);
 
         yield put(swapiActions.setIsFetching(true));
+        // блокирующий эффект
         yield delay(1000);
-        const data = yield call(fetchPlanets, action);
+        // блокирующий эффект
+        const data = yield call(fetchPlanets, action);// action - 1й аргумент при вызове fetchPlanets
 
         yield put(swapiActions.fillPlanets(data.results));
         yield put(swapiActions.setIsFetching(false));

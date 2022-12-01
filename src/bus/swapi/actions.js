@@ -26,9 +26,9 @@ export const swapiActions = {
         type:    types.FETCH_PLANETS_ASYNC,
         payload: page,
     }),
-    fillPlanets: (vehicles) => ({
+    fillPlanets: (planets) => ({
         type:    types.FILL_PLANETS,
-        payload: vehicles,
+        payload: planets,
     }),
     cancelFetch: () => ({
         type: types.CANCEL_FETCH,
